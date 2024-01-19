@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 
 	_ "github.com/lib/pq"
@@ -28,3 +29,24 @@ func connectPostgresDB() *sql.DB{
 	return db
 }
 
+func insert(db *sql.DB){
+	fmt.Println("Enter the id:")
+	fmt.Scan(&id)
+	fmt.Println("Enter the name:")
+	fmt.Scan(&name)
+	fmt.Println("Enter the domain:")
+	fmt.Scan(&domain)
+	insertIntoPostgres(db,id,name,domain)
+}
+
+func insertIntoPostgres(db *sql.DB,id int,name string,domain string){
+	_,err :=db.Exec("INSERT INTO student(id,name,domain)value($1,$2,$3)",id,name,domain)
+
+	if err != nil{
+		fmt.Println(err)
+	}else{
+		fmt.Println("Value Inserted!!")
+	}
+
+
+}
