@@ -19,7 +19,6 @@ func main() {
 }
 
 // db connection
-
 func connectPostgresDB() *sql.DB{
 	connectTo := "user=postgres dbname =databasename password='********' host=localhost port =5432 sslmode = disable"
 	db , err := sql.Open("postgres",connectTo)
@@ -47,6 +46,19 @@ func insertIntoPostgres(db *sql.DB,id int,name string,domain string){
 	}else{
 		fmt.Println("Value Inserted!!")
 	}
-
-
 }
+
+func Read(db *sql.DB){
+	rows,err := db.Query("SELECT * FROM student")
+	if err != nil{
+		fmt.Println(err)
+	}else{
+		fmt.Println("id name domain")
+		for rows.Next() {
+			rows.Scan(&id,&name,&domain)
+			fmt.Println("%d - %s - %s \n",id,name,domain)
+		}
+	}
+}
+
+
