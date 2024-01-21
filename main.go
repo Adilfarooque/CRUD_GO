@@ -61,4 +61,18 @@ func Read(db *sql.DB){
 	}
 }
 
+func Update(db *sql.DB){
+	fmt.Println("Enter the id:")
+	fmt.Scan(&id)
+	fmt.Println("Enter new name:")
+	fmt.Scan(&name)
+	fmt.Println("Enter new domain")
+	fmt.Scan(&domain)
 
+	_,err := db.Query("UPDATE SET name=$1,domain=$2, WHERE id=$3",name,domain,id)
+	if err != nil{
+		fmt.Println(err)
+	}else{
+		fmt.Println("UPdated!!!")
+	}
+}
