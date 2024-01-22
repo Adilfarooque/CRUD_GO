@@ -72,7 +72,7 @@ func Read(db *sql.DB) {
 		fmt.Println("id name domain")
 		for rows.Next() {
 			rows.Scan(&id, &name, &domain)
-			fmt.Println("%d - %s - %s \n", id, name, domain)
+			fmt.Printf("%d - %s - %s \n", id, name, domain)
 		}
 	}
 }
